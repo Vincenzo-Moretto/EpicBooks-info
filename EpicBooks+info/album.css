@@ -80,7 +80,7 @@ footer p {
 
 .btn-secondary:hover {
   cursor: pointer;
-  background-color: #ff0000;
+  background-color: #525252;
   cursor: wait;
 }
 
@@ -95,4 +95,19 @@ footer p {
 
 .Loghi {
   cursor: pointer;
+}
+
+.body {
+  position: relative;
+}
+
+.arrow {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  position: fixed;
+}
+
+.arrow-none {
+  display: none;
 }

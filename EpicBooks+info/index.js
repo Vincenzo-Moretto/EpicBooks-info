@@ -19,12 +19,10 @@ const fetchBooks = () => {
             <div class="card-body">
               <p class="font-weight-bold text-truncate book-title">${book.title}</p>
               <div class="d-flex justify-content-between align-items-center">
-                <button class="btn btn-primary" onclick="addToCart('${book.title}', '${book.price}', '${book.asin}')">
+                <button class="btn btn-primary" onclick="addToCart('${book.title}', '${book.price}', '${book.asin}', '${book.img}')">
                  ${book.price} €
                 </button>
-                <button class="btn btn-secondary" onclick="changeBook(event)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
-              </svg></button>
+                <button class="btn btn-secondary" onclick="changeBook(event)"><i class="bi bi-arrow-repeat"></i></button>
               </div>
               <a class='btn btn-warning w-100' href='./details.html?id=${book.asin}'> Dettagli </a>
             </div>
@@ -36,12 +34,15 @@ const fetchBooks = () => {
     .catch((err) => console.error(err));
 };
 
-const addToCart = (title, price, asin) => {
+const addToCart = (title, price, asin, img) => {
   const book = document.querySelector("#book_" + asin);
   book.style.border = "2px red solid";
   const cart = document.querySelector(".list-group");
   cart.innerHTML += `
-  <li class="list-group-item">${title}, ${price} <button class='btn btn-danger' onclick='removeFromCart(event, "${asin}", "${price}")'> X </button></li>
+  <li class="list-group-item">
+  <img src=${img} alt=${title} width="60px" height="60px">
+  
+  ${title}, ${price} € <button class='btn btn-danger' onclick='removeFromCart(event, "${asin}", "${price}")'> <i class="bi bi-trash3-fill"></i> </button></li>
   
   `;
   const totale = document.querySelector("h1 span");
@@ -93,10 +94,16 @@ const scroll = () => {
   let scrollY = window.scrollY;
   console.log(scrollY);
   const nav = document.querySelector(".navbar");
+  const nava = document.querySelector(".freccia");
   if (scrollY > 200) {
     nav.classList.add("nav");
+
+    nava.classList.remove("arrow-none");
+    nava.classList.add("arrow");
   } else {
     nav.classList.remove("nav");
+    nava.classList.remove("arrow");
+    nava.classList.add("arrow-none");
   }
 };
 
